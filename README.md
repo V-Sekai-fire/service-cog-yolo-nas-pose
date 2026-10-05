@@ -1,10 +1,10 @@
 # service-cog-yolo-nas-pose
 
-A model container that serves a single-pass person detection and pose estimation network, with an entry point for fine-tuning it.
+A model container that serves a single-pass person detection and pose estimation network.
 
 ## What it is for
 
-The prediction endpoint takes an image and returns the detected keypoints as JSON and an annotated image. The training endpoint fine-tunes the pretrained weights on a zipped dataset and returns the new weights.
+The prediction endpoint takes an image and returns the detected keypoints as JSON and an annotated image. `train.py` is an unfinished training stub and does not train.
 
 ## Build and run
 
@@ -12,7 +12,7 @@ The prediction endpoint takes an image and returns the detected keypoints as JSO
 just predict path/to/image.jpg
 ```
 
-This runs the prediction through `cog`, which must be installed.
+This runs the prediction through `cog` and decodes its output with `jq` and `base64`; all three must be installed.
 
 ## Licence
 
