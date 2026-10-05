@@ -1,53 +1,19 @@
-# cog-yolo-nas-pose
+# service-cog-yolo-nas-pose
 
-A serverless deployment of the state-of-the-art YOLO-NAS Pose model on Replicate.
+A model container that serves a single-pass person detection and pose estimation network, with an entry point for fine-tuning it.
 
-## Overview
+## What it is for
 
-This repository contains the code necessary to deploy the YOLO-NAS Pose model as a serverless endpoint on Replicate. YOLO-NAS Pose integrates object detection and pose estimation into a single, efficient pass. Its advanced backbone and neck architecture, paired with a pose estimation head optimized by AutoNAC, deliver real-time performance with high accuracy.
+The prediction endpoint takes an image and returns the detected keypoints as JSON and an annotated image. The training endpoint fine-tunes the pretrained weights on a zipped dataset and returns the new weights.
 
-For more details about YOLO-NAS Pose, see:
+## Build and run
 
-- [LearnOpenCV: YOLO-NAS Pose](https://learnopencv.com/yolo-nas-pose/)
-- [SuperGradients YOLO-NAS Pose Documentation](https://github.com/Deci-AI/super-gradients/blob/master/YOLONAS-POSE.md)
-
-## How to Use Custom Models
-
-Customizing the deployment with your own model weights is simple:
-
-1. Add your model weights file to the root of this repository.
-2. Update the model initialization in [predict.py](predict.py). For example:
-
-   ```python
-   # Change this line in predict.py
-   self.model = models.get("yolo_nas_pose_l", checkpoint_path="your-custom-model.pth", num_classes=17)
-   ```
-
-3. Follow the [Replicate deployment guide](https://replicate.com/docs/guides/deploy-a-custom-model) to publish your model.
-
-## How to use with API
-
-Learn more about the available API endpoints from the [Replicate API Documentation](https://replicate.com/hardikdava/rf-detr/api).
-
-## Local Development and Testing
-
-To test the model locally before deployment:
-
-```bash
-# Install cog if you haven't already
-pip install cog
-
-# Run a prediction with a local image
-cog predict -i image=@/path/to/your/image.jpg
+```sh
+just predict path/to/image.jpg
 ```
 
-## Requirements
+This runs the prediction through `cog`, which must be installed.
 
-- Python 3.8+
-- PyTorch 1.10+
-- Cog
-- yolo-nas-pose
+## Licence
 
-## License
-
-This project is licensed under the Apache-2.0 License - see the [LICENSE](https://github.com/V-Sekai-fire/cog-yolo-nas-pose/blob/main/LICENSE) file for details.
+Apache-2.0; see `LICENSE`.
